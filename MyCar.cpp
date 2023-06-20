@@ -1,16 +1,19 @@
 
 #include "MyCar.h"
+
 int MyCar::getLicenseNumber() const {
     return _licenseNumber;
 }
 
 void MyCar::setLicenseNumber(int licenseNumber) {
     if (licenseNumber < 0) {
-        throw new string("This Number Must be great the 0");
+        throw invalid_argument("This Number Must be great the 0");
     } else {
         _licenseNumber = licenseNumber;
     }
 }
+
+
 double MyCar::getPrice() const {
     return _price;
 }
@@ -60,8 +63,8 @@ void MyCar::setHand(int hand) {
     _hand = hand;
 }
 
-void MyCar::setCar(int licenseNumber, char * model, double price, int year, char * color, int engineCapacity,
-                   char * gearType, char * creatureLand, int hand) {
+void MyCar::setCar(int licenseNumber, char *model, double price, int year, char *color, int engineCapacity,
+                   char *gearType, char *creatureLand, int hand) {
     this->setLicenseNumber(licenseNumber);
     this->setModel(model);
     this->setPrice(price);
@@ -75,13 +78,13 @@ void MyCar::setCar(int licenseNumber, char * model, double price, int year, char
 
 void MyCar::getCar() {
     int licenseNumber;
-    char  model[10];
+    char *model = new char;
     double price;       //מחיר
     int year;           //שנה
-    char color[10];     // צבע
+    char *color = new char;     // צבע
     int engineCapacity; // קיבולת מנוע
-    char gearType[10];
-    char creatureLand[10];
+    char *gearType = new char;
+    char *creatureLand = new char;
     int hand;   // יד
     cout << "Enter the license Number (great then 0):" << endl;
     cin >> licenseNumber;
@@ -103,7 +106,7 @@ void MyCar::getCar() {
     this->setEngineCapacity(engineCapacity);
     cout << "Enter the gear type (str)" << endl;
     cin >> gearType;
-    setGearType(gearType);
+    this->setGearType(gearType);
     cout << "Enter the land (str)" << endl;
     cin >> creatureLand;
     this->setCreatureLand(creatureLand);
@@ -118,11 +121,15 @@ MyCar::MyCar() {
 }
 
 MyCar::~MyCar() {
+    delete _model;
+    delete _color;
+    delete _gearType;
+    delete _creatureLand;
     cout << "This car is destroyed !!!" << endl;
 }
 
 void MyCar::print() const {
-    cout<<"----------------------------------------------------"<<endl;
+    cout << "----------------------------------------------------" << endl;
     cout << "license:: " << this->getLicenseNumber() << endl;
     cout << "model:: " << this->getModel() << endl;
     cout << "price:: " << this->getPrice() << endl;
@@ -131,9 +138,10 @@ void MyCar::print() const {
     cout << "gear Type:: " << this->getGearType() << endl;
     cout << "creature Land:: " << this->getCreatureLand() << endl;
     cout << "hand :: " << this->getHand() << endl;
-    cout<<"-------------------------------------------"<<endl;
+    cout << "-------------------------------------------" << endl;
 }
-bool MyCar::compare(MyCar & car)const {
+
+bool MyCar::compare(MyCar &car) const {
     return this->getYear() < car.getYear();
 }
 

@@ -1,7 +1,11 @@
 
 #include "MyCar.h"
+#include "ManageCars.h"
+
 int main() {
-    MyCar car;  // it's do a car and ask the user for details...
-    car.print();
+    ManageCars cars;
+    MyCar c1;
+    cars.addCar(c1);
+    cars.printAll();
     return 0;
 }
